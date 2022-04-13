@@ -1,0 +1,314 @@
+<!doctype html>
+<html>
+<head>
+
+	<title>SpaceNet6-OTD</title>
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1">
+	<link href="css/main.css" media="screen" rel="stylesheet" type="text/css"/>
+	<link href="css/index.css" media="screen" rel="stylesheet" type="text/css"/>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:400,700' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Raleway:400,600,700' rel='stylesheet' type='text/css'>
+	<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+			CommonHTML: { linebreaks: { automatic: true } },
+			"HTML-CSS": { linebreaks: { automatic: true } },
+				 SVG: { linebreaks: { automatic: true } }
+			});
+	</script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	</script>
+	
+</head>
+
+<body>
+
+<div class="menu-container noselect">
+	<div class="menu">
+		<table class="menu-table">
+			<tr>
+				<td>
+					<div class="logo">
+						<a href="javascript:void(0)">SpaceNet6-OTD</a>
+					</div>
+				</td>
+				<td>
+					<div class="menu-items">
+						<a class="menu-highlight">Overview</a>
+						<a href="https://github.com/ZhangRuixiang-WHU/SpaceNet6-OTD">GitHub</a>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<div class="content-container">
+	<div class="content">
+		<table class="content-table">
+		      <h1 style="text-align:center; margin-top:60px; font-weight: bold; font-size: 35px;">
+				Optical-enhanced Oil Tank Detection in High-resolution SAR Images </h1>
+	        
+				<p style="text-align:center; margin-bottom:15px; margin-top:20px; font-size: 18px;">
+					<a href="https://github.com/ZhangRuixiang-WHU/" style="color: #0088CC">Ruixiang Zhang<script type="math/tex">^1</script>, </a>
+					<a href="https://github.com/whughw" style="color: #0088CC">Haowen Guo<script type="math/tex">^1</script>, </a>
+					<a href="https://github.com/xufangchn" style="color: #0088CC">Fang Xu<script type="math/tex">^1</script>, </a>
+					<a href="http://www.captain-whu.com/yangwen_En.html" style="color: #0088CC">Wen Yang<script type="math/tex">^{1,*}</script>, </a>
+          <a href="https://github.com/levenberg" style="color: #0088CC">Huai Yu<script type="math/tex">^1</script>,</a>
+          <a href="http://dvs-whu.cn/" style="color: #0088CC">Haijian Zhang<script type="math/tex">^1</script>,</a> 
+					<a href="http://www.captain-whu.com/xia_En.html" style="color: #0088CC">Gui-Song Xia<script type="math/tex">^{2}</script>, </a> <br>
+					<!-- <a href="http://www.dsi.unive.it/~pelillo/" style="color: #0088CC">Marcello Pelillo<script type="math/tex">^3</script></a> <br> -->
+                     
+					<a target="_blank" href="https://dsp.whu.edu.cn/" style="color: #0088CC; font-style: italic"><script type="math/tex">^1</script>EIS SPL, Wuhan University, Wuhan, China</a><br>
+					<a target="_blank" href="http://captain.whu.edu.cn/" style="color: #0088CC; font-style: italic"><script type="math/tex">^2</script>CAPTAIN, Wuhan University, Wuhan, China</a>  <br>
+
+				</p>	 
+				<p style="text-align:center; margin-bottom:15px; margin-top:20px; font-size: 18px;"> 
+					<a href="https://github.com/ZhangRuixiang-WHU/SpaceNet6-OTD" style="color: hsl(17, 100%, 40%)"> Data and code coming soon!
+					</a>
+				</p>
+		
+			
+			<tr>
+				<!-- <td colspan="1"> -->
+					<h2 class="add-top-margin">Abstract</h2>
+					<hr>
+				<!-- </td> -->
+			</tr>
+			<tr>
+					<!-- <td colspan="1"> -->
+
+				<p class="text" style="text-align:justify;">
+					In recent years, object detection in high-resolution SAR images has made significant progress, 
+					especially after the introduction of deep learning. However, the dense oil tanks, 
+					which are compactly arranged targets in SAR images, are still challenging to recognize due to the unique imaging mechanism of SAR. 
+					Inspired by human learning from comparison, we propose a multi-stage framework  for oil tank detection in SAR images using optical image enhancement. 
+					Specifically, in the training stage, we build the teacher-student network to transfer the knowledge between the two modalities, 
+					where the optical oil tank features are used to guide SAR oil tank features learning. While in the inference stage, 
+					the network detects oil tank targets using only SAR images as input. Besides, a pre-training stage before training is applied to 
+					further improve the network's ability for SAR feature extraction, which is realized by the proposed 
+					paired optical-SAR self-supervised learning. To verify the effectiveness of the proposed method, 
+					we performed experiments on our newly built SpaceNet6-OTD dataset. 
+					Extensive experiments demonstrate that the proposed method can effectively improve the performance of SAR image oil tank detection.
+				</p>
+					<!-- </td> -->
+			</tr>
+
+			<tr>
+				<!-- <td colspan="1"> -->
+					<h2 class="add-top-margin">Introduction</h2>
+					<hr>
+				<!-- </td> -->
+			</tr>
+
+			<tr>
+				<p class="text" style="text-align:justify;">
+					Synthetic Aperture Radar~(SAR) sensors have the unique capability to penetrate clouds and collect during all-weather, day, and night conditions,
+					which has been widely used in both civilian and military fields . 
+					High-resolution SAR data can provide more valuable information when weather and cloud cover can obstruct traditional optical sensors, 
+					which are suitable for detecting and monitoring some typical objects, such as buildings, ships, planes, vehicles, and oil tanks. 
+					In this work, we focus on detecting oil tanks in  high-resolution SAR images.
+ 
+          <br>
+          <br>
+            However, detecting the oil tanks in SAR images is very challenging due to the unique imaging mechanism of SAR images. 
+			The oil tank targets in the SAR images are usually dense and compact with more overlaps and discrete scattering centers, which increases the difficulty of location in detection. 
+			Figure. 1 shows some samples of SAR images with oil tanks. 
+			As we can see, the heavy scattering interference between the dense oil tanks causes a blurred and cluttered appearance, which is hard to distinguish even the experts of SAR image analysis.
+				</p>
+			</tr>
+
+			<tr>
+				<td>
+					<div>
+					<img class="center" src="./images/fig1.png" width="800" /> <br>
+					<p class="image-caption">
+						Figure 1. (a) is the high-resolution SAR image with compact oil tanks. The SAR Intensity is visualized with three polarizations (HH, VV, HV) displayed through the Red, Green, and Blue color channels. (b) is the corresponding optical image. (c) is the detection result of Faster R-CNN. (d) is the detection result of our method. (The green boxes refer to the correct detection results, the yellow boxes refer to the false detection results, and the red boxes refer to the missing targets.
+					</p>				
+					</div>
+				</td>
+			</tr>
+
+			<tr>
+				<p class="text" style="text-align:justify;">
+					For the existing methods, the unsatisfactory detection accuracy is mainly caused by the indistinguishable appearance of the oil tanks in  high-resolution SAR images. 
+					So naturally, how can we teach the network learning to recognize the oil tank in SAR images? 
+					As we all know, when humans encounter an illegible image of an unknown modality, 
+					we often learn to recognize it by comparing the corresponding image of a recognizable modality. 
+					Inspired by that, we propose introducing optical images more suitable for human vision to guide the network to learn the feature of oil tanks in SAR images. 
+				</p>
+			</tr>
+
+			<tr>
+				<td>
+					<div>
+					<img class="center" src="./images/fig2.png" width="800" /> <br>
+					<p class="image-caption">
+						Figure 2. The proposed pipeline for detecting oil tanks in SAR images, uses optical-SAR self-supervised learning to pre-train a better feature extractor as the initialization in the training stage. First, the optical network guides the SAR network as the teacher. Then, the model detects the oil tanks during inference using only SAR images as input.
+					</p>				
+					</div>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+				<p class="text" style="text-align:justify;">
+					  Based on the above, we design a multi-stage pipeline for detecting oil tanks in SAR images with the enhancement of optical images, as shown in Figure. 2. 
+					  First, Optical-guided self-supervised learning is used in the pre-training stage to obtain the feature extractor suitable for SAR images. 
+					  Then, in the training stage,  a teacher-student network is constructed to make the SAR branch learn how to recognize oil tanks from the optical branch through knowledge distillation. 
+					  Finally, the model detects the oil tanks using only SAR images as input during the inference stage. Our contribution can be summarized as follows:
+					
+					<ul style="font-weight:normal; text-align:justify;">
+							<li> We propose a pipeline that uses optical images to guide SAR images to train a better oil tank detector in SAR images. Paired optical images and SAR images are used in the training stage, while only SAR images are used in the inference stage. </li>
+							<li> We introduce paired optical-SAR images into the self-supervised learning to obtain a better SAR image feature extractor, improving the downstream oil tank detection task by 8-9 %. </li>
+							<li> We construct an oil tank detection dataset, SpaceNet6-OTD, to explore the effectiveness of the proposed method. The dataset contains 820 paired SAR-Optical images with carefully labeled bounding boxes.</li>							
+					</ul>
+
+				</p>
+				</td>
+			</tr>
+      <!-- <tr>
+				<td>
+						<h2 class="add-top-margin">AI-TOD-v2</h2>
+						<hr>
+				</td>
+			</tr>
+      <tr>
+        <td>
+            <h3 class="add-top-margin">Statistics</h3>
+            
+        </td>
+    </tr>
+
+    <tr>
+      <td>
+        <div>
+        <img class="center" src="images/statistics.PNG" width="1000" /> <br>
+        <p class="image-caption">
+          Figure 2. Statistics of classes and instances in AI-TOD-v2. (a) Histogram of the number of instances per class. (b) Histogram of number of instances per image. (c) Histogram of number of instances’ sizes. (d) Boxplot depicting the range of sizes for each object category.
+        </p>				
+        </div>
+      </td>
+    </tr>
+
+	<tr>
+		<td>
+		  <div>
+		  <img class="center" src="images/mean.PNG" width="500" /> <br>
+		  <p class="image-caption">
+			Table 1. Mean and standard deviation of object scale on different
+			datasets.
+		  </p>				
+		  </div>
+		</td>
+	  </tr>
+
+	  <tr>
+        <td>
+            <h3 class="add-top-margin">Download</h3>
+            1. AI-TOD
+			[<a href="https://drive.google.com/drive/folders/1mokzFtLCjyqalSEajYTUmyzXvOHAa4WX" style="color: #0088CC">images & annotations</a>]<br>
+			2. AI-TOD-v2
+			[<a href="https://drive.google.com/drive/folders/1mokzFtLCjyqalSEajYTUmyzXvOHAa4WX" style="color: #0088CC">images & annotations</a>]<br>
+			Note that the AI-TOD and AI-TOD-v2 share the image sets.
+        </td>
+     </tr> -->
+
+			<tr>
+				<td>
+						<h2 class="add-top-margin">Experimental Results</h2>
+						<hr>
+				</td>
+			</tr>
+
+			<tr>
+					<td>
+							<h3 class="add-top-margin">A Comparison of Different Methods on SpaceNet6-OTD</h3>
+							
+					</td>
+			</tr>
+					
+			<tr>
+				<td>
+					<div>
+					<img class="center" src="images/fig3.png" width="1000" /> <br>
+					<p class="image-caption">
+						Figure 3. Visualization of detection results using our proposed method compared with other state-of-the-art methods. The green boxes refer to the correct detection results, the yellow boxes refer to the false detection results, and the red boxes refer to the missing targets.
+					</p>				
+					</div>
+				</td>
+			</tr>
+
+			<!-- <tr>
+				<td>
+						<h2 class="add-top-margin">Related Work</h2>
+						<hr>
+						<p class="text" style="text-align:justify;"></p>
+						Our work is built based on our past works including: <a href="https://ieeexplore.ieee.org/abstract/document/9413340" style="color: #0088CC">AI-TOD</a> [1], <a href="https://arxiv.org/abs/2102.12219" style="color: #0088CC">DOTA-v2.0</a> [3], <a href="https://openaccess.thecvf.com/content/CVPR2021W/EarthVision/html/Xu_Dot_Distance_for_Tiny_Object_Detection_in_Aerial_Images_CVPRW_2021_paper.html" style="color: #0088CC">DotD</a> [4] and <a href="https://arxiv.org/abs/2110.13389" style="color: #0088CC">NWD</a> [5]. If you found our work helpful, consider citing these works as well.
+				</td>
+			</tr> -->
+			<tr>
+					<td>
+							<h2 class="add-top-margin">Acknowledgements</h2>
+							<hr>
+							<p class="text" style="text-align:justify;"></p>
+						We would like to thank the anonymous reviewers for their valuable comments and contributions. 
+						This project has received funding from the National Natural Science Foundation of China (NSFC) under Grant 61771351. 
+						In addition, the numerical calculations in this article have been done on the supercomputing system in the Supercomputing Center, Wuhan University.
+							
+					</td>
+				</tr>
+
+			<tr>
+					<td colspan="2">
+					<h2 class="add-top-margin">References</h2>
+					<hr>
+					<ol style="padding-inline-start:20px;">
+						<li>
+							<b>Spacenet 6: Multi-sensor all weather mapping dataset </b>
+							[<a href="https://openaccess.thecvf.com/content_CVPRW_2020/papers/w11/Shermeyer_SpaceNet_6_Multi-Sensor_All_Weather_Mapping_Dataset_CVPRW_2020_paper.pdf" style="color: #0088CC">paper</a>]<br>
+								J. Shermeyer, D. Hogan, J. Brown, A. Van Etten, N. Weir,
+								F. Pacifici, R. Hansch, A. Bastidas, S. Soenen, T. Bacastow
+							et al. <br>
+								IEEE Conference on Computer Vision and Pattern Recognition Workshops (<b>CVPRW</b>), 2020.
+						</li>
+						<li>
+							<b>Bootstrap your own latent-a new approach to self-supervised learning </b>
+							[<a href="https://proceedings.neurips.cc/paper/2020/file/f3ada80d5c4ee70142b17b8192b2958e-Paper.pdf" style="color: #0088CC">paper</a>]<br>
+								J.-B. Grill, F. Strub, F. Altch ́e, C. Tallec, P. Richemond,
+								E. Buchatskaya, C. Doersch, B. Avila Pires, Z. Guo, M. Gheshlaghi Azar et al. <br>
+								Advances in Neural Information Processing Systems (<b>NIPS</b>), 2020.
+						</li>	
+						<li>
+							<b>EO-augmented building segmentation for airborne sar imagery </b>
+							[<a href="https://ieeexplore.ieee.org/abstract/document/9417203" style="color: #0088CC">paper</a>]<br>
+								J. Kim, S. Shin, S. Kim, and Y. Kim. <br>
+								IEEE Geoscience and Remote Sensing Letters (<b>GRSL</b>), 2021.
+						</li>	
+
+						<li>
+							<b>Paying more attention to attention: improving the performance of convolutional neural networks via attention transfer </b>
+							[<a href="https://arxiv.org/pdf/1612.03928.pdf" style="color: #0088CC">paper</a>]<br>
+							N. Komodakis and S. Zagoruyko <br>
+							International Conference on Learning Representations (<b>ICLR</b>), 2017.
+						</li>	
+
+						
+
+					</ol>
+					</td>
+				</tr>
+				
+					
+			<br><br>
+		 </table>
+		 			
+		
+	<div class="footer">
+		<p class="block">&copy; 2021 by Chang Xu at SPL</p>
+	</div>
+
+	</div>
+</div>
+</body>
+</html>
